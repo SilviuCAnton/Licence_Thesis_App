@@ -1,0 +1,7 @@
+{
+  "name": "EasyOrder-Client",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

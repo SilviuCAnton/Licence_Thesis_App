@@ -1,0 +1,32 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-title>Your Orders</ion-title>
+        <ion-card-subtitle *ngIf="username">Hello, {{username}}</ion-card-subtitle>
+        <ion-button slot="end" (click)="logOut()">Log Out</ion-button>
+    </ion-toolbar>
+</ion-header>
+<ion-content class="ion-padding-top">
+    <ng-container *ngIf="!orders.length">
+        <p class="ion-text-center">Currently, there are no orders!</p>
+    </ng-container>
+    <ng-template [ngIf]="orders">
+        <div *ngFor="let order of orders">
+            <ion-card>
+                <ion-card-header class="ion-text-center" (click)="presentModal(order)">
+                    <ion-card-title>Order {{order.id}} </ion-card-title>
+                    <ion-card-subtitle>{{order.orderDate | date: AppConstants.DATE_TIME_FORMAT}}</ion-card-subtitle>
+                </ion-card-header>
+                <ion-card-content>
+                    Table: {{abs(order.tableId)}}
+                    <div *ngFor="let item of order.displayMenuItems">
+                        1 x {{item.name}}
+                    </div>
+                    {{order.comments}}
+                </ion-card-content>
+                <div class="action-button-container">
+                    <ion-button class="ion-margin" (click)="markAsDone(order.id)">Mark As Done</ion-button>
+                </div>
+            </ion-card>
+        </div>
+    </ng-template>
+</ion-content>

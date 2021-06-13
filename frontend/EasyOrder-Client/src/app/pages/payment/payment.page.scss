@@ -1,0 +1,19 @@
+ion-title {
+  text-align: center;
+}
+
+form{
+  padding: 20px;
+}
+
+ion-content {
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(/assets/restaurantImage.jpg) center;
+}
+
+.large-text > *{
+  font-size: large;
+}
+
+input{
+  margin-bottom: 7.5px;
+}

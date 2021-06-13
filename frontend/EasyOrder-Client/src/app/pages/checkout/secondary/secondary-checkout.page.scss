@@ -1,0 +1,25 @@
+.card-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 5px;
+  padding: 0;
+}
+
+.menu-items-list {
+  height: calc(100% - 61px);
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  padding: 0;
+}
+
+.menu-items-container {
+  flex-grow: 1;
+  overflow: auto;
+}
+
+.price-frequency{
+  margin-left: 15px;
+}

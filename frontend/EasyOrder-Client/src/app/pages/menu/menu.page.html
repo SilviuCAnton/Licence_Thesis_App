@@ -1,0 +1,18 @@
+<app-header></app-header>
+
+<div *ngIf="menuSection" class="scrollmenu">
+    <a *ngFor="let menu of menuSection" [ngClass]="{'active': currentMenu === menu}" (click)="setCurrentMenu(menu)">{{menu.categoryName}}</a>
+</div>
+<ion-content>
+    <ng-template [ngIf]="menuSection">
+        <app-menu-item [menuSection]="currentMenu"></app-menu-item>
+    </ng-template>
+
+    <ion-fab (click)="shareLink()" vertical="bottom" horizontal="end" slot="fixed">
+        <ion-fab-button>
+            <ion-icon name="share-social-outline"></ion-icon>
+        </ion-fab-button>
+    </ion-fab>
+
+</ion-content>
+<app-footer [isPrincipalClient]="isPrincipalClient"></app-footer>

@@ -1,0 +1,50 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-buttons *ngIf="!isDone" slot="start">
+            <ion-back-button></ion-back-button>
+        </ion-buttons>
+        <ion-title>Checkout</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ng-template [ngIf]="!isDone">
+        <ion-list class="menu-items-list">
+            <div class="menu-items-container">
+                <ng-template [ngIf]="menuItems.length === 0">
+                    <h3 class="text-center">You have 0 items in your cart</h3>
+                </ng-template>
+                <div *ngFor="let item of menuItems">
+                    <ion-card>
+                        <ion-card-header (click)="showItem(item.menuItem)">
+                            <ion-card-title>{{item.menuItem.name}}</ion-card-title>
+                            <ion-card-subtitle class="small-text">{{item.menuItem.description}}</ion-card-subtitle>
+                        </ion-card-header>
+                        <ion-card-content class="card-content">
+                            <p class="small-text price-frequency">{{item.menuItem.price}} RON x {{item.frequency}}</p>
+                            <ion-buttons slot="end">
+                                <ion-button color="primary"
+                                            [disabled]="item.frequency <= 0"
+                                            (click)="decreaseOrderNumber(item)">
+                                    <ion-icon slot="icon-only" ios="remove-outline" md="remove-outline"></ion-icon>
+                                </ion-button>
+                                <h3>{{item.frequency}}</h3>
+                                <ion-button (click)="increaseOrderNumber(item)" color="primary">
+                                    <ion-icon slot="icon-only" ios="add-outline" md="add-outline"></ion-icon>
+                                </ion-button>
+                            </ion-buttons>
+                        </ion-card-content>
+                    </ion-card>
+                </div>
+            </div>
+        </ion-list>
+        <ion-card class="card-content">
+            <ion-card-content>Total price: {{totalPrice}}</ion-card-content>
+            <ion-button class="ion-padding-end" (click)="handleDone()">Done</ion-button>
+        </ion-card>
+    </ng-template>
+    <ng-template [ngIf]="isDone">
+        <h3 class="ion-text-center">Your order has been placed successfully</h3>
+    </ng-template>
+</ion-content>
+

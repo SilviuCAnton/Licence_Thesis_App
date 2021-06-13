@@ -1,0 +1,16 @@
+<section>
+  <div *ngFor="let menuItem of menuSection.menuItems">
+    <ion-card (click)="showItem(menuItem)"
+              [ngClass]="{ unavailable: menuItem.available === false }">
+      <ion-card-header>
+        <ion-card-title>{{ menuItem.name }}</ion-card-title>
+        <ion-card-subtitle class="small-text">{{
+          menuItem.description
+        }}</ion-card-subtitle>
+      </ion-card-header>
+      <ion-card-content>
+        <p class="small-text">de la {{ menuItem.price }} RON</p>
+      </ion-card-content>
+    </ion-card>
+  </div>
+</section>

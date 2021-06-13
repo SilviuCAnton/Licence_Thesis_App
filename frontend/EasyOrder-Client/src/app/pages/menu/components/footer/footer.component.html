@@ -1,0 +1,27 @@
+<ion-footer *ngIf="shoppingCartService.getAllOrderedItemsCount() >= 1">
+    <ion-toolbar color="primary">
+        <ion-row>
+            <ion-col>
+                <div class="center hidden-xs-up">
+                    <div class="text">{{shoppingCartService.getAllOrderedItemsCount()}}</div>
+                </div>
+                <div class="center hidden-xs-down">
+                    <div class="text">Menu items: {{shoppingCartService.getAllOrderedItemsCount()}} </div>
+                </div>
+            </ion-col>
+            <ion-col>
+                <div class="center">
+                    <ion-button (click)="goToCheckout()">Checkout</ion-button>
+                </div>
+            </ion-col>
+            <ion-col>
+                <div class="center hidden-xs-up">
+                    <div class="text">{{shoppingCartService.computeTotalPrice()}} RON</div>
+                </div>
+                <div class="center hidden-xs-down">
+                    <div class="text">Total price: {{shoppingCartService.computeTotalPrice()}} RON</div>
+                </div>
+            </ion-col>
+        </ion-row>
+    </ion-toolbar>
+</ion-footer>

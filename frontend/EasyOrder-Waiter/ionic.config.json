@@ -1,0 +1,7 @@
+{
+  "name": "EasyOrder-Waiter",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

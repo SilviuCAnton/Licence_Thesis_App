@@ -1,0 +1,8 @@
+.action-button-container {
+  display: flex;
+  justify-content: center;
+
+  ion-button {
+    flex-grow: 1;
+  }
+}

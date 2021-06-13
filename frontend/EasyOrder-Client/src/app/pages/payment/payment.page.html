@@ -1,0 +1,30 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Payment</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="d-flex justify-content-center align-items-center w-100 h-100">
+  <div class="d-flex justify-content-center align-items-center ion-padding-top">
+    <form class="form-group large-text" >
+      <label for="cardOwner">Card owner</label>
+      <input [(ngModel)]="owner" name="cardOwner" type="text" class="form-control" id="cardOwner" placeholder="Card owner">
+
+      <label for="cardNumber">Card number</label>
+      <input [(ngModel)]="cardNumber" name="cardNumber" type="text" class="form-control" id="cardNumber" placeholder="Card number">
+
+      <label for="expireDate">Expire date</label>
+      <input [(ngModel)]="expireDate" name="expireDate" type="text" class="form-control" id="expireDate" placeholder="expireDate">
+
+      <label for="cvv">CVV</label>
+      <input [(ngModel)]="cvv" name="cardOwner" type="number" class="form-control" id="cvv" placeholder="CVV">
+
+      <br>
+      <ion-button expand="full" (click)="handlePay()" color="primary">Pay</ion-button>
+      <br>
+    </form>
+  </div>
+</ion-content>

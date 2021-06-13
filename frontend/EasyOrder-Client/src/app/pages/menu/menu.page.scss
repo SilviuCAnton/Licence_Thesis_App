@@ -1,0 +1,38 @@
+div.scrollmenu {
+  overflow: auto;
+  white-space: nowrap;
+  width: 100%;
+  opacity: 1;
+  z-index: 1;
+  box-shadow: 4px 0 16px rgba(0, 0, 0, 0.18);
+  background-color: white;
+}
+
+div.scrollmenu a {
+  font-size: 16px;
+  font-family: Open Sans,sans-serif;
+  font-weight: 700;
+  display: inline-block;
+  color: #118ab2;
+  text-align: center;
+  text-transform: uppercase;
+  padding: 14px;
+  text-decoration: none;
+}
+
+div.scrollmenu a:hover {
+  border-bottom: 2px solid #118ab2;
+  padding-bottom: 12px;
+  font-weight: 700;
+}
+
+div.scrollmenu a.active{
+  border-bottom: 2px solid #118ab2;
+  padding-bottom: 12px;
+  font-weight: 700;
+}
+
+.section {
+  background-color: black;
+  margin-top: 50px;
+}

@@ -1,0 +1,27 @@
+<ng-template [ngIf]="order">
+    <ion-card>
+        <ion-card-header class="ion-text-center">
+            <ion-card-title>Order {{order.id}} </ion-card-title>
+            <ion-card-subtitle>{{order.orderDate | date: AppConstants.DATE_TIME_FORMAT}}</ion-card-subtitle>
+        </ion-card-header>
+        <ion-list class="ion-padding">
+            <div class="ion-text-center">
+                Table: {{abs(order.tableId)}}
+            </div>
+            <div>
+                <div *ngFor="let item of order.displayMenuItems">
+                    <div class="description">
+                        1 x {{item.name}}
+                    </div>
+                    <div class="description">
+                        Ingredients: {{item.description}}
+                    </div>
+                    <div *ngIf="order.comments && order.comments !== ''" class="description">
+                        Comments: {{order.comments}}
+                    </div>
+                </div>
+            </div>
+        </ion-list>
+    </ion-card>
+</ng-template>
+<ion-button class="ion-margin" (click)="dismiss()">Back</ion-button>

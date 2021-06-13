@@ -1,0 +1,35 @@
+<ion-header translucent>
+    <ion-toolbar color="primary">
+        <ion-buttons slot="primary">
+            <ion-button (click)="dismiss()">
+                <ion-icon slot="icon-only" ios="close-outline" md="close-outline"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+        <ion-title>Personalizeaza</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen>
+    <div class="content">
+        <img class="centered-image" [src]="imageUrl + '/' + menuItem.photoPath" alt=""/>
+        <h2 class="title">{{menuItem.name}}</h2>
+        <h2 class="small-text">{{menuItem.description}}</h2>
+    </div>
+</ion-content>
+
+<ion-footer *ngIf="showAddInCart">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button [disabled]="ordersNumber <= 1"
+                  (click)="decreaseOrderNumber()"
+                  color="primary">
+        <ion-icon  slot="icon-only" ios="remove-outline" md="remove-outline"></ion-icon>
+      </ion-button>
+      <h3>{{ordersNumber}}</h3>
+      <ion-button (click)="increaseOrderNumber()" color="primary">
+        <ion-icon  slot="icon-only" ios="add-outline" md="add-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons >
+    <ion-button style="font-size: 10px;" (click)="addCart()" slot="end">Adauga in cos</ion-button>
+  </ion-toolbar>
+</ion-footer>
