@@ -1,0 +1,124 @@
+version: "3.8"
+services:
+    easyorder-registry:
+        image: easyorder-registry:local
+        container_name: easyorder-registry
+        restart: always
+        ports:
+            - 8900:8900
+        build:
+            context: ./serviceRegistry
+            dockerfile: docker/Dockerfile
+
+    easyorder-inventory:
+        image: easyorder-inventory:local
+        container_name: easyorder-inventory
+        restart: always
+        build:
+            context: ./inventoryService
+            dockerfile: docker/Dockerfile
+        depends_on:
+            - postgres
+            - easyorder-registry
+        environment:
+            - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres:5432/${POSTGRES_DATABASE_NAME}
+            - SPRING_DATASOURCE_USERNAME=${POSTGRES_USER}
+            - SPRING_DATASOURCE_PASSWORD=${POSTGRES_PASS}
+            - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://easyorder-registry:8900/eureka
+
+    easyorder-logistics:
+        image: easyorder-logistics:local
+        container_name: easyorder-logistics
+        restart: always
+        build:
+            context: ./logisticsService
+            dockerfile: docker/Dockerfile
+        depends_on:
+            - postgres
+            - easyorder-registry
+        environment:
+            - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres:5432/${POSTGRES_DATABASE_NAME}
+            - SPRING_DATASOURCE_USERNAME=${POSTGRES_USER}
+            - SPRING_DATASOURCE_PASSWORD=${POSTGRES_PASS}
+            - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://easyorder-registry:8900/eureka
+
+    easyorder-order:
+        image: easyorder-order:local
+        container_name: easyorder-order
+        restart: always
+        build:
+            context: ./orderService
+            dockerfile: docker/Dockerfile
+        depends_on:
+            - postgres
+            - easyorder-registry
+            - easyorder-inventory
+            - easyorder-logistics
+        environment:
+            - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres:5432/${POSTGRES_DATABASE_NAME}
+            - SPRING_DATASOURCE_USERNAME=${POSTGRES_USER}
+            - SPRING_DATASOURCE_PASSWORD=${POSTGRES_PASS}
+            - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://easyorder-registry:8900/eureka
+
+    easyorder-menu:
+        image: easyorder-menu:local
+        container_name: easyorder-menu
+        restart: always
+        build:
+            context: ./menuService
+            dockerfile: docker/Dockerfile
+        depends_on:
+            - easyorder-registry
+            - easyorder-inventory
+        environment:
+            - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://easyorder-registry:8900/eureka
+
+    easyorder-payment:
+        image: easyorder-payment:local
+        container_name: easyorder-payment
+        restart: always
+        build:
+            context: ./paymentService
+            dockerfile: docker/Dockerfile
+        depends_on:
+            - easyorder-registry
+        environment:
+            - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://easyorder-registry:8900/eureka
+
+    easyorder-gateway:
+        image: easyorder-gateway:local
+        container_name: easyorder-gateway
+        restart: always
+        build:
+            context: ./apiGatewayService
+            dockerfile: docker/Dockerfile
+        ports:
+            - 8080:8080
+        depends_on:
+            - postgres
+            - easyorder-registry
+            - easyorder-inventory
+            - easyorder-logistics
+            - easyorder-menu
+            - easyorder-order
+            - easyorder-payment
+        environment:
+            - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres:5432/${POSTGRES_DATABASE_NAME}
+            - SPRING_DATASOURCE_USERNAME=${POSTGRES_USER}
+            - SPRING_DATASOURCE_PASSWORD=${POSTGRES_PASS}
+            - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://easyorder-registry:8900/eureka
+
+    postgres:
+        image: postgres:13.3
+        container_name: postgres
+        restart: always
+        environment:
+            - POSTGRES_USER=${POSTGRES_USER}
+            - POSTGRES_PASSWORD=${POSTGRES_PASS}
+            - POSTGRES_DB=${POSTGRES_DATABASE_NAME}
+        volumes:
+            - postgres-data:/var/lib/postgresql/data
+
+volumes:
+  postgres-data:
+    driver: local

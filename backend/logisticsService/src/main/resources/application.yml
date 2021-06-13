@@ -1,0 +1,18 @@
+spring:
+  application:
+    name: logistics-service
+  datasource:
+    username: postgres
+    password: postgres
+    url: jdbc:postgresql://localhost:5432/testDb
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+server:
+  port: 8084
+eureka:
+  client:
+    serviceURL:
+      defaultZone: http://localhost:8900/eureka
+

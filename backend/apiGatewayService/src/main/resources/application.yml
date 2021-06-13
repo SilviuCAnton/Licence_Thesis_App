@@ -1,0 +1,37 @@
+
+spring:
+  datasource:
+    username: postgres
+    password: postgres
+    url: jdbc:postgresql://localhost:5432/testDb
+    driver-class-name: org.postgresql.Driver
+  application:
+    name: gateway-service
+  jpa:
+    hibernate:
+      ddl-auto: update
+zuul:
+  ribbon:
+    ReadTimeout: 1000000
+  routes:
+    orderService:
+      path: /order-service/**
+      serviceId: ORDER-SERVICE
+    inventoryService:
+      path: /inventory-service/**
+      serviceId: INVENTORY-SERVICE
+    menuService:
+      path: /menu-service/**
+      serviceId: MENU-SERVICE
+    logisticsService:
+      path: /logistics-service/**
+      serviceId: LOGISTICS-SERVICE
+    paymentService:
+      path: /payment-service/**
+      serviceId: PAYMENT-SERVICE
+server:
+  port: 8080
+eureka:
+  client:
+    serviceURL:
+      defaultZone: http://localhost:8900/eureka

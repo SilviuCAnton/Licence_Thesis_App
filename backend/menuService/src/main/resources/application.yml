@@ -1,0 +1,10 @@
+spring:
+  application:
+    name: menu-service
+
+server:
+  port: 8083
+eureka:
+  client:
+    serviceURL:
+      defaultZone: http://localhost:8900/eureka
