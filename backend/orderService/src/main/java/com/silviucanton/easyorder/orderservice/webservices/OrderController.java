@@ -1,14 +1,11 @@
 package com.silviucanton.easyorder.orderservice.webservices;
 
-import com.silviucanton.easyorder.commons.client.LogisticsClient;
 import com.silviucanton.easyorder.commons.dto.DisplayOrderDTO;
 import com.silviucanton.easyorder.commons.dto.MenuSectionDTO;
 import com.silviucanton.easyorder.commons.dto.OrderDTO;
-import com.silviucanton.easyorder.commons.dto.Payload;
-import com.silviucanton.easyorder.commons.dto.WaiterDTO;
-import com.silviucanton.easyorder.commons.dto.WebSocketEvents;
-import com.silviucanton.easyorder.commons.dto.WebSocketNotification;
-import com.silviucanton.easyorder.orderservice.domain.exceptions.WaiterNotFoundException;
+import com.silviucanton.easyorder.commons.dto.ReserveItemsDTO;
+import com.silviucanton.easyorder.commons.utils.RabbitConnectionConstants;
+import com.silviucanton.easyorder.commons.utils.RabbitConstants;
 import com.silviucanton.easyorder.orderservice.services.OrderService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -16,6 +13,7 @@ import io.swagger.annotations.ApiParam;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -37,15 +35,12 @@ import java.util.List;
 @RestController
 public class OrderController {
     private final OrderService orderService;
-    private final LogisticsClient logisticsClient;
-    private final OrderNotificationSocketHandler orderNotificationHandler;
+    private final RabbitTemplate rabbitTemplate;
 
     public OrderController(OrderService orderService,
-                           LogisticsClient logisticsClient,
-                           OrderNotificationSocketHandler orderNotificationHandler) {
+                           RabbitTemplate rabbitTemplate) {
         this.orderService = orderService;
-        this.logisticsClient = logisticsClient;
-        this.orderNotificationHandler = orderNotificationHandler;
+        this.rabbitTemplate = rabbitTemplate;
     }
 
     @ApiResponses({
@@ -61,17 +56,11 @@ public class OrderController {
     public DisplayOrderDTO saveOrder(@Valid @RequestBody OrderDTO orderDTO) {
         log.debug("Entered class = OrderController & method = saveOrder");
 
-        WaiterDTO waiter = logisticsClient.findWaiterById(orderNotificationHandler.getNextWaiterId())
-                .orElseThrow(() -> new WaiterNotFoundException("The waiter with the given id doesn't exist."));
+        rabbitTemplate.convertAndSend(RabbitConnectionConstants.EXCHANGE_NAME,
+                RabbitConnectionConstants.INVENTORY_ROUTING_KEY,
+                new ReserveItemsDTO(RabbitConstants.ORDER_PENDING_STATUS, orderDTO));
 
-        DisplayOrderDTO displayOrderDTO = orderService.saveOrder(orderDTO, waiter);
-
-//        TODO:this should be commented when running tests
-        orderNotificationHandler
-                .notifyWaiter(waiter.getId(), new WebSocketNotification<>(WebSocketEvents.NEW_ORDER_EVENT,
-                        new Payload<>("", displayOrderDTO)));
-
-        return displayOrderDTO;
+        return new DisplayOrderDTO();
     }
 
     @ApiResponses({

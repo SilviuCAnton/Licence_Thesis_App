@@ -42,6 +42,9 @@ public class Item implements Entity<Long> {
     @JoinColumn(name = "category_id")
     private Category category;
 
+    @Column(name = "quantity")
+    private long quantity;
+
     @Override
     public Long getId() {
         return this.id;

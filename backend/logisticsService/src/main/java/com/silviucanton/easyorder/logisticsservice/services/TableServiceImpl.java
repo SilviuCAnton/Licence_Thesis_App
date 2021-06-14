@@ -3,9 +3,11 @@ package com.silviucanton.easyorder.logisticsservice.services;
 import com.silviucanton.easyorder.commons.dto.TableDTO;
 import com.silviucanton.easyorder.logisticsservice.dao.TableRepository;
 import org.modelmapper.ModelMapper;
+import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
+@Service
 public class TableServiceImpl implements TableService {
 
     private final TableRepository tableRepository;

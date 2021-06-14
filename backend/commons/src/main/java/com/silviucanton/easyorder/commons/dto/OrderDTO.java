@@ -29,4 +29,6 @@ public class OrderDTO {
     @ApiModelProperty(required = true, example = "[4, 2, 1]", value = "menuItemIds")
     @NotNull(message = "List of MenuItem id-s must NOT be null.")
     private List<Long> menuItemIds;
+
+    private String sessionId;
 }

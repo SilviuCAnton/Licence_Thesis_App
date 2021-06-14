@@ -61,23 +61,39 @@ export class MenuPage implements OnInit {
                     this.storageService.set(AppConstants.SESSION_ID, sessionId).then();
                     this.webSocketService.open();
                     this.linkShare = this.linkShare + sessionId;
+                    this.toastService.sessionId = sessionId;
                 });
         }
 
         this.webSocketService.messagesSubject.subscribe(res => {
             const nickname = res["nickname"];
             const menuItemIds = res["menuItemIds"];
-            //Customize background-color(TO-DO)
-            this.toastService.toast({
-                header: nickname + " a facut o schimbare",
-                duration: 2000,
-                position: 'top',
-            });
 
-            if (menuItemIds) {
-                this.checkoutService.addNewCustomer(nickname, menuItemIds);
-                this.checkoutService.getCustomerList();
+            if (nickname == "PLACED_ORDER_EVENT") {
+                this.toastService.toast({
+                    header: "Comanda a fost preluata",
+                    duration: 2000,
+                    position: 'top',
+                });
+            } else if (nickname == "FAILED_ORDER_EVENT") {
+                this.toastService.toast({
+                    header: "Comanda a esuat",
+                    duration: 2000,
+                    position: 'top',
+                });
+            } else {
+                this.toastService.toast({
+                    header: nickname + " a facut o schimbare",
+                    duration: 2000,
+                    position: 'top',
+                });
+
+                if (menuItemIds) {
+                    this.checkoutService.addNewCustomer(nickname, menuItemIds);
+                    this.checkoutService.getCustomerList();
+                }
             }
+           
             console.log(res);
         });
     }

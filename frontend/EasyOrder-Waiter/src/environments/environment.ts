@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
   urlApi: 'http://localhost:8080/easyOrder/api',
-  wsApi: 'ws://localhost:8080/easyOrder/api/newOrder',
+  wsApi: 'ws://localhost:8080/easyOrder/api/order-service/newOrder',
   // urlApi: 'https://easy-order.cf:8080/easyOrder/api',
   // wsApi: 'wss://easy-order.cf:8080/easyOrder/api/newOrder',
 };

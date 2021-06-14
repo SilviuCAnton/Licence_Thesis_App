@@ -7,6 +7,8 @@ import {ToastModel} from 'src/app/domain/toast';
 })
 export class ToastService {
 
+    public sessionId: string;
+
     constructor(public toastController: ToastController) {
     }
 

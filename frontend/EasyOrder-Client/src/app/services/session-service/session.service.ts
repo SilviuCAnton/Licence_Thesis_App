@@ -13,7 +13,7 @@ export class SessionService {
     }
 
     getNewSessionId(): Observable<string> {
-        const url = `${environment.urlApi}/session/newSessionId`;
+        const url = `${environment.urlApi}/order-service/session/newSessionId`;
         return this.httpClient.get<string>(url, HttpUtils.getSimpleResponseHeaders());
     }
 }

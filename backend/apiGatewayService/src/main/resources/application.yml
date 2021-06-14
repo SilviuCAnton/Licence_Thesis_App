@@ -31,6 +31,8 @@ zuul:
       serviceId: PAYMENT-SERVICE
 server:
   port: 8080
+  servlet:
+    context-path: /easyOrder/api
 eureka:
   client:
     serviceURL:

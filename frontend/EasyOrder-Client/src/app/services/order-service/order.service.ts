@@ -12,7 +12,7 @@ import {MenuService} from '../menu-service/menu.service';
 })
 export class OrderService {
 
-    private readonly baseUrl = `${environment.urlApi}/orders`;
+    private readonly baseUrl = `${environment.urlApi}/order-service/orders`;
 
     constructor(private readonly httpClient: HttpClient) {
     }
@@ -31,6 +31,7 @@ export class OrderService {
     saveOrderSpread(
         comments: string,
         menuItems: MenuItemWrapper[],
+        sessionId: string
     ): Observable<Order> {
         const menuItemIds = [];
         menuItems.forEach((item) => {
@@ -40,7 +41,7 @@ export class OrderService {
         });
         const tableId = MenuService.tableId;
         console.log(tableId);
-        return this.saveOrder({comments, menuItemIds, tableId});
+        return this.saveOrder({comments, menuItemIds, tableId, sessionId});
     }
 
     setOrderStatus(orderId: number, isDone: boolean = true) {

@@ -13,7 +13,7 @@ export class MenuService {
     constructor(private readonly httpClient: HttpClient) {
     }
     static tableId: number;
-    private readonly baseUrl = `${environment.urlApi}/menu`;
+    private readonly baseUrl = `${environment.urlApi}/menu-service/menu`;
 
     getMenuItems(): Observable<MenuSection[]> {
         return this.httpClient.get<MenuSection[]>(this.baseUrl, HttpUtils.getDefaultHeaders());

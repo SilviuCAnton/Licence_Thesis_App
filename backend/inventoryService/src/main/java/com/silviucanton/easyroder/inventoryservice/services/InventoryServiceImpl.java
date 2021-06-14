@@ -48,7 +48,7 @@ public class InventoryServiceImpl implements InventoryService {
                 menuItem.getPrice(),
                 menuItem.getPhotoPath(),
                 menuItem.isAvailable(),
-                null);
+                null, 5);
 
         categoryOpt.ifPresentOrElse(newItem::setCategory,
                 () -> newItem.setCategory(categoryRepository.save(new Category(0L, menuItem.getCategory()))));
@@ -70,7 +70,7 @@ public class InventoryServiceImpl implements InventoryService {
                 menuItemDTO.getPrice(),
                 menuItemDTO.getPhotoPath(),
                 menuItemDTO.isAvailable(),
-                null);
+                null, 5);
         categoryOpt.ifPresentOrElse(newItem::setCategory,
                 () -> newItem.setCategory(categoryRepository.save(new Category(0L, menuItemDTO.getCategory()))));
 

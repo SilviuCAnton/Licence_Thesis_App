@@ -39,7 +39,7 @@ export class PaymentPage implements OnInit {
         .subscribe(
             success => {
               console.log('POST call in success', success);
-              this.orderService.saveOrderSpread('', this.shoppingCartService.getMenuItems())
+              this.orderService.saveOrderSpread('', this.shoppingCartService.getMenuItems(), this.toastService.sessionId)
                   .subscribe(
                       () => {
                           this.navController.navigateBack('').then();

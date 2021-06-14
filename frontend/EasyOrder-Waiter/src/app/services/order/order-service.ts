@@ -14,12 +14,12 @@ export class OrderService {
     }
 
     getOrdersForWaiterWithStatus(userId: number, isDone: boolean): Observable<DisplayOrder[]> {
-        const url = `${environment.urlApi}/orders?id=${userId}&isDone=${isDone}`;
+        const url = `${environment.urlApi}/order-service/orders?id=${userId}&isDone=${isDone}`;
         return this.httpClient.get<DisplayOrder[]>(url, HttpUtils.getDefaultHeaders());
     }
 
     markOrderAsDone(orderId: number): Observable<void> {
-        const url = `${environment.urlApi}/orders/${orderId}/markAsDone`;
+        const url = `${environment.urlApi}/order-service/orders/${orderId}/markAsDone`;
         return this.httpClient.put<void>(url, {}, HttpUtils.getDefaultHeaders());
     }
 }

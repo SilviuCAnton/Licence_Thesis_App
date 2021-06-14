@@ -13,7 +13,7 @@ import {AppConstants} from 'src/app/domain/app-constants';
 })
 export class TempOrderService {
 
-    private readonly baseUrl = `${environment.urlApi}/tempOrders`;
+    private readonly baseUrl = `${environment.urlApi}/order-service/tempOrders`;
 
     constructor(private readonly httpClient: HttpClient,
                 private readonly storageService: StorageService) {

@@ -8,7 +8,7 @@ export const environment = {
   // url: 'https://easy-order.cf',
   urlApi: 'http://localhost:8080/easyOrder/api',
   // urlApi: 'https://easy-order.cf:8080/easyOrder/api',
-  wsApi: 'ws://localhost:8080/easyOrder/api/newMasterClient',
+  wsApi: 'ws://localhost:8080/easyOrder/api/order-service/newMasterClient',
   // wsApi: 'wss://easy-order.cf:8080/easyOrder/api/newMasterClient',
 };
 

@@ -14,6 +14,7 @@ import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.OneToOne;
+import javax.persistence.UniqueConstraint;
 
 @Data
 @AllArgsConstructor
@@ -31,7 +32,7 @@ public class Employee implements Entity<Long> {
     @Column(name = "name")
     private String name;
 
-    @Column(name = "username")
+    @Column(name = "username", unique = true)
     private String username;
 
     @Override

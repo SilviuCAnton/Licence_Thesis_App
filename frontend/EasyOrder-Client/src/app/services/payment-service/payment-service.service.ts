@@ -10,7 +10,7 @@ import {CreditCard} from '../../domain/credit-card';
 })
 export class PaymentService {
 
-    private readonly baseUrl = `${environment.urlApi}/pay`;
+    private readonly baseUrl = `${environment.urlApi}/payment-service/pay`;
 
     constructor(private readonly httpClient: HttpClient) {
     }
