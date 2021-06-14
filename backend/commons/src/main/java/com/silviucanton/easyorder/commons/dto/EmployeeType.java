@@ -1,5 +1,7 @@
 package com.silviucanton.easyorder.commons.dto;
 
-public enum EmployeeType {
+import java.io.Serializable;
+
+public enum EmployeeType implements Serializable {
     MANAGER, WAITER
 }

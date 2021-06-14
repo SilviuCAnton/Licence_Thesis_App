@@ -56,7 +56,7 @@ public class OrderController {
     public DisplayOrderDTO saveOrder(@Valid @RequestBody OrderDTO orderDTO) {
         log.debug("Entered class = OrderController & method = saveOrder");
 
-        rabbitTemplate.convertAndSend(RabbitConnectionConstants.EXCHANGE_NAME,
+        rabbitTemplate.convertAndSend(RabbitConnectionConstants.INVENTORY_EXCHANGE_NAME,
                 RabbitConnectionConstants.INVENTORY_ROUTING_KEY,
                 new ReserveItemsDTO(RabbitConstants.ORDER_PENDING_STATUS, orderDTO));
 

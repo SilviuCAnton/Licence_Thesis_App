@@ -9,11 +9,12 @@ import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.io.Serializable;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class CreditCardDTO {
+public class CreditCardDTO implements Serializable {
     @ApiModelProperty(required = true, example = "Popescu Mirel", value = "owner")
     @Size(max = 255, message = "Owner cannot be longer than 255 characters.")
     @NotNull(message = "Owner must NOT be null.")

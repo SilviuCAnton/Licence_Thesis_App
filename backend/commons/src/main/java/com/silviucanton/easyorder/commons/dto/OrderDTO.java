@@ -7,19 +7,20 @@ import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.io.Serializable;
 import java.util.List;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class OrderDTO {
+public class OrderDTO implements Serializable {
     @ApiModelProperty(required = true, example = "9", value = "id")
-    @NotNull(message = "Id must NOT be null.")
+//    @NotNull(message = "Id must NOT be null.")
     private Long id;
 
     @ApiModelProperty(required = true, example = "burger without onion", value = "comments")
     @Size(max = 255, message = "Comments cannot be longer than 255 characters.")
-    @NotNull(message = "Comments must NOT be null.")
+    // @NotNull(message = "Comments must NOT be null.")
     private String comments;
 
     @ApiModelProperty(required = true, example = "3", value = "tableId")

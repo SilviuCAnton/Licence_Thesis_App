@@ -1,6 +1,8 @@
 package com.silviucanton.easyorder.commons.dto;
 
-public class WebSocketEvents {
+import java.io.Serializable;
+
+public class WebSocketEvents implements Serializable {
 
     public static String NEW_ORDER_EVENT = "NEW_ORDER";
     public static String NEW_CLIENT_EVENT = "NEW_CLIENT_EVENT";

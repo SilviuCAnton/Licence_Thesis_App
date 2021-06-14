@@ -24,11 +24,13 @@ public class RabbitOrderSagaReceiver {
 
     public void receiveMessage(ReserveItemsDTO reserveItemsDTO) {
         List<Item> allById = inventoryRepository.findAllById(reserveItemsDTO.getOrder().getMenuItemIds());
+        System.out.println("Received message");
 
         switch (reserveItemsDTO.getStatus()) {
             case RabbitConstants.ORDER_PENDING_STATUS:
+                System.out.println("In ORDER_PENDING");
                 if (allById.stream().anyMatch(item -> item.getQuantity() == 0)) {
-                    rabbitTemplate.convertAndSend(RabbitConnectionConstants.EXCHANGE_NAME,
+                    rabbitTemplate.convertAndSend(RabbitConnectionConstants.ORDER_EXCHANGE_NAME,
                             RabbitConnectionConstants.ORDER_ROUTING_KEY,
                             new ReserveItemsDTO(RabbitConstants.RESERVE_FAIL, reserveItemsDTO.getOrder()));
                 } else {
@@ -36,7 +38,7 @@ public class RabbitOrderSagaReceiver {
                         item.setQuantity(item.getQuantity() - 1);
                         inventoryRepository.save(item);
                     });
-                    rabbitTemplate.convertAndSend(RabbitConnectionConstants.EXCHANGE_NAME,
+                    rabbitTemplate.convertAndSend(RabbitConnectionConstants.ORDER_EXCHANGE_NAME,
                             RabbitConnectionConstants.ORDER_ROUTING_KEY,
                             new ReserveItemsDTO(RabbitConstants.RESERVE_SUCCESS, reserveItemsDTO.getOrder()));
                 }

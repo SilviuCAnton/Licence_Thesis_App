@@ -7,12 +7,13 @@ import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.io.Serializable;
 import java.util.List;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class SignUpDTO {
+public class SignUpDTO implements Serializable {
     @ApiModelProperty(required = true, example = "John Smith", value = "name")
     @Size(max = 255, message = "Name cannot be longer than 255 characters.")
     @NotNull(message = "Name must NOT be null.")

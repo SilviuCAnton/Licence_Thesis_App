@@ -6,11 +6,12 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.Min;
+import java.io.Serializable;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class TableDTO {
+public class TableDTO implements Serializable {
 
     @ApiModelProperty(required = true, example = "2", value = "id")
     @Min(value = 0, message = "Table id cannot be negative.")

@@ -59,7 +59,7 @@ public class RabbitOrderSagaReceiver {
                                             Collections.emptyList(), reserveItemsDTO.getOrder().getSessionId()))));
 
                 } catch (Exception ex) {
-                    rabbitTemplate.convertAndSend(RabbitConnectionConstants.EXCHANGE_NAME,
+                    rabbitTemplate.convertAndSend(RabbitConnectionConstants.INVENTORY_EXCHANGE_NAME,
                             RabbitConnectionConstants.INVENTORY_ROUTING_KEY,
                             new ReserveItemsDTO(RabbitConstants.ORDER_FAILED_STATUS, reserveItemsDTO.getOrder()));
 

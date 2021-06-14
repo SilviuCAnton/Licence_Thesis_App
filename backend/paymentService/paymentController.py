@@ -17,7 +17,6 @@ class PaymentController:
 		
 
 	@app.route('/pay', methods=['POST'])
-	@cross_origin()
 	def getDataWithFields():
 		jsonValue = request.get_json();
 		if (jsonValue['cvv'] < 500):
@@ -28,7 +27,7 @@ shouldTry = True;
 
 while(shouldTry):
 	try:
-		time.sleep(90);
+		time.sleep(120);
 		eureka_client.init(eureka_server=os.getenv("EUREKA_CLIENT_SERVICEURL_DEFAULTZONE"),
 						app_name="payment-service",
 						instance_port=5000);

@@ -7,12 +7,13 @@ import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.io.Serializable;
 import java.util.List;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class DisplayOrderDTO {
+public class DisplayOrderDTO implements Serializable {
     @ApiModelProperty(required = true, example = "9", value = "id")
     @NotNull(message = "Id must NOT be null.")
     private Long id;

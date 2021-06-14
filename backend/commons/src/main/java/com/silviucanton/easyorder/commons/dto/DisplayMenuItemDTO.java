@@ -5,10 +5,12 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.io.Serializable;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class DisplayMenuItemDTO {
+public class DisplayMenuItemDTO implements Serializable {
     @ApiModelProperty(required = true, example = "4", value = "id")
     private long id;
     @ApiModelProperty(required = true, example = "tiramisu", value = "name")

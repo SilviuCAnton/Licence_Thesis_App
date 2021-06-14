@@ -21,9 +21,9 @@ import org.springframework.web.client.RestTemplate;
 @Configuration
 public class BeanConfiguration {
 
-    static final String topicExchangeName = RabbitConnectionConstants.EXCHANGE_NAME;
+    static final String topicExchangeName = RabbitConnectionConstants.ORDER_EXCHANGE_NAME;
 
-    static final String queueName = RabbitConnectionConstants.QUEUE_NAME;
+    static final String queueName = RabbitConnectionConstants.ORDER_QUEUE_NAME;
 
     @Bean
     Queue queue() {
@@ -78,5 +78,4 @@ public class BeanConfiguration {
         System.out.println(serviceInfo.getHomePageUrl());
         return new InventoryClient(serviceInfo.getHomePageUrl());
     }
-
 }

@@ -30,6 +30,7 @@ services:
             - SPRING_DATASOURCE_USERNAME=${POSTGRES_USER}
             - SPRING_DATASOURCE_PASSWORD=${POSTGRES_PASS}
             - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://easyorder-registry:8900/eureka
+            - SPRING_RABBITMQ_HOST=rabbitmq
 
     easyorder-logistics:
         image: easyorder-logistics:local
@@ -54,6 +55,8 @@ services:
         build:
             context: ./orderService
             dockerfile: docker/Dockerfile
+        ports:
+            - 8081:8051
         depends_on:
             - postgres
             - easyorder-registry
@@ -64,6 +67,7 @@ services:
             - SPRING_DATASOURCE_USERNAME=${POSTGRES_USER}
             - SPRING_DATASOURCE_PASSWORD=${POSTGRES_PASS}
             - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://easyorder-registry:8900/eureka
+            - SPRING_RABBITMQ_HOST=rabbitmq
 
     easyorder-menu:
         image: easyorder-menu:local

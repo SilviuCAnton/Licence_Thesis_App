@@ -7,12 +7,13 @@ import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.io.Serializable;
 import java.util.List;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class TempOrderDTO {
+public class TempOrderDTO implements Serializable {
     @ApiModelProperty(required = true, example = "3", value = "id")
     @NotNull(message = "Id must NOT be null.")
     private Long id;

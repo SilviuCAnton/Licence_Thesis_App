@@ -16,9 +16,9 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class BeanConfiguration {
 
-    static final String topicExchangeName = RabbitConnectionConstants.EXCHANGE_NAME;
+    static final String topicExchangeName = RabbitConnectionConstants.INVENTORY_EXCHANGE_NAME;
 
-    static final String queueName = RabbitConnectionConstants.QUEUE_NAME;
+    static final String queueName = RabbitConnectionConstants.INVENTORY_QUEUE_NAME;
 
     @Bean
     Queue queue() {
